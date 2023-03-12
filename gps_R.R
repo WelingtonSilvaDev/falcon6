@@ -4,7 +4,9 @@ library("leaflet.extras")
 library(bslib)
 library(osrm)
 library(sf)
+library(shinycssloaders)
 
+options(spinner.color = "#0275D8", spinner.color.background = "#ffffff", spinner.size = 2)
 ui <- fluidPage(
   theme = bslib::bs_theme(bootswatch = "yeti", base_font = font_google("Montserrat")),
   title = "Falcon-6 Rocket Design - GPS",
@@ -25,7 +27,7 @@ ui <- fluidPage(
           numericInput("lon2", "Longitude final do foguete:", value = -43.21241653929604, step = 0.0001, width = 600),
         ),
         mainPanel(
-          leafletOutput("map", width = "100%", height = "900px") 
+          withSpinner(leafletOutput("map", width = "100%", height = "900px"), type = 3)
         )
       )
     ),
